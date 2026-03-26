@@ -7,7 +7,7 @@
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -23,13 +23,17 @@ vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
 vim.o.breakindent = true
+vim.o.smartindent = true -- smart auto-indent
+vim.o.autoindent = true  -- copy indent from current line
 
 -- Enable undo/redo changes even after closing and reopening a file
 vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.o.ignorecase = true -- case insensitive search
+vim.o.smartcase = true  -- case sensitive if uppercase in string
+vim.o.hlsearch = true   -- highlight search matches
+vim.o.incsearch = true  -- show matches as you type
 
 -- Keep signcolumn on by default
 vim.o.signcolumn = 'yes'
@@ -70,3 +74,26 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Display a tab character as 4 spaces
+vim.o.tabstop = 4
+
+-- Enable spell checking
+vim.o.spell = false
+
+vim.o.showmatch = true  -- highlights matching brackets
+vim.o.autoread = true   -- auto-reload changes if outside of neovim
+vim.o.autowrite = false -- do not auto-save
+
+-- Word wrap
+vim.o.wrap = false
+-- wrap, linebreak and spellcheck on markdown and text files
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup,
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.spell = true
+  end,
+})
