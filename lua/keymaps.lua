@@ -14,7 +14,7 @@ vim.diagnostic.config {
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Can switch between these as you prefer
-  virtual_text = true, -- Text shows up at the end of the line
+  virtual_text = true,   -- Text shows up at the end of the line
   virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
@@ -65,3 +65,57 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim: ts=2 sts=2 sw=2 et
+
+-- better movement in wrapped text
+vim.keymap.set('n', 'j', function()
+  return vim.v.count == 0 and 'gj' or 'j'
+end, { expr = true, silent = true, desc = 'Down (wrap-aware)' })
+vim.keymap.set('n', 'k', function()
+  return vim.v.count == 0 and 'gk' or 'k'
+end, { expr = true, silent = true, desc = 'Up (wrap-aware)' })
+
+vim.keymap.set('n', '<C-Up>', '<C-w>+', { desc = 'Increase window height' })
+vim.keymap.set('n', '<C-Down>', '<C-w>-', { desc = 'Decrease window height' })
+vim.keymap.set('n', '<C-Left>', '<C-w><', { desc = 'Decrease window width' })
+vim.keymap.set('n', '<C-Right>', '<C-w>>', { desc = 'Increase window width' })
+
+vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { desc = 'Move line down' })
+vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move line up' })
+vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+
+vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
+vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
+
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines and keep cursor position' })
+
+vim.keymap.set({ 'n' }, '<D-s>', ':w<CR>', { desc = 'Save file' })
+vim.keymap.set({ 'i' }, '<D-s>', '<ESC>:w<CR>i', { desc = 'Save file' })
+
+vim.keymap.set('n', '<C-n>', ':tabe<CR>', { desc = 'Create new tab' })
+
+vim.keymap.set('n', '<leader>n', ':Oil --float<CR>', { desc = '[N]avigate' })
+
+vim.keymap.set('n', '<leader>p', ':MarkdownPreviewToggle<CR>', { desc = 'Markdown [P]review Toggle' })
+
+-- Make keymaps
+-- Make terminal splits
+vim.api.nvim_set_keymap('n', '<leader>mtv', ':vsplit | terminal<CR>',
+  { noremap = true, silent = true, desc = '[M]ake [T]erminal ([V]ertical Split)' })
+vim.api.nvim_set_keymap('n', '<leader>mth', ':split | terminal<CR>',
+  { noremap = true, silent = true, desc = '[M]ake [T]erminal ([H]orizontal Split)' })
+-- Make splits
+vim.api.nvim_set_keymap('n', '<leader>msv', ':vsplit<CR>',
+  { noremap = true, silent = true, desc = '[M]ake [S]plit [V]ertical' })
+vim.api.nvim_set_keymap('n', '<leader>msh', ':split<CR>',
+  { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
+
+-- Copilot AI keymaps
+vim.keymap.set('n', '<leader>at', ':Copilot toggle<CR>', { desc = '[A]I Copilot [T]oggle Buffer Status' })
+vim.keymap.set('n', '<leader>as', ':Copilot status<CR>', { desc = '[A]I Copilot [S]tatus' })
+vim.keymap.set('n', '<leader>al', ':Copilot model list<CR>', { desc = '[A]I Copilot [L]ist Models' })
+vim.keymap.set('n', '<leader>ap', ':Copilot panel<CR>', { desc = '[A]I Copilot [P]anel' })
+vim.keymap.set('n', '<leader>aa', ':Copilot suggestion toggle_auto_trigger<CR>',
+  { desc = '[A]I Copilot Toggle [A]uto Trigger' })
+vim.keymap.set('n', '<leader>ad', ':Copilot disable<CR>', { desc = '[A]I Copilot [D]isable' })
+vim.keymap.set('n', '<leader>ae', ':Copilot enable<CR>', { desc = '[A]I Copilot [E]nable' })
