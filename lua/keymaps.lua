@@ -8,17 +8,17 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
 vim.diagnostic.config {
-  update_in_insert = false,
-  severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+    update_in_insert = false,
+    severity_sort = true,
+    float = { border = 'rounded', source = 'if_many' },
+    underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
-  -- Can switch between these as you prefer
-  virtual_text = true,   -- Text shows up at the end of the line
-  virtual_lines = false, -- Text shows up underneath the line, with virtual lines
+    -- Can switch between these as you prefer
+    virtual_text = true, -- Text shows up at the end of the line
+    virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
-  -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
-  jump = { float = true },
+    -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
+    jump = { float = true },
 }
 
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -47,10 +47,10 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
+vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -59,19 +59,19 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function() vim.hl.on_yank() end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function() vim.hl.on_yank() end,
 })
 
 -- vim: ts=2 sts=2 sw=2 et
 
 -- better movement in wrapped text
 vim.keymap.set('n', 'j', function()
-  return vim.v.count == 0 and 'gj' or 'j'
+    return vim.v.count == 0 and 'gj' or 'j'
 end, { expr = true, silent = true, desc = 'Down (wrap-aware)' })
 vim.keymap.set('n', 'k', function()
-  return vim.v.count == 0 and 'gk' or 'k'
+    return vim.v.count == 0 and 'gk' or 'k'
 end, { expr = true, silent = true, desc = 'Up (wrap-aware)' })
 
 vim.keymap.set('n', '<C-Up>', '<C-w>+', { desc = 'Increase window height' })
@@ -101,14 +101,14 @@ vim.keymap.set('n', '<leader>p', ':MarkdownPreviewToggle<CR>', { desc = 'Markdow
 -- Make keymaps
 -- Make terminal splits
 vim.api.nvim_set_keymap('n', '<leader>mtv', ':vsplit | terminal<CR>',
-  { noremap = true, silent = true, desc = '[M]ake [T]erminal ([V]ertical Split)' })
+    { noremap = true, silent = true, desc = '[M]ake [T]erminal ([V]ertical Split)' })
 vim.api.nvim_set_keymap('n', '<leader>mth', ':split | terminal<CR>',
-  { noremap = true, silent = true, desc = '[M]ake [T]erminal ([H]orizontal Split)' })
+    { noremap = true, silent = true, desc = '[M]ake [T]erminal ([H]orizontal Split)' })
 -- Make splits
 vim.api.nvim_set_keymap('n', '<leader>msv', ':vsplit<CR>',
-  { noremap = true, silent = true, desc = '[M]ake [S]plit [V]ertical' })
+    { noremap = true, silent = true, desc = '[M]ake [S]plit [V]ertical' })
 vim.api.nvim_set_keymap('n', '<leader>msh', ':split<CR>',
-  { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
+    { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
 
 -- Copilot AI keymaps
 vim.keymap.set('n', '<leader>at', ':Copilot toggle<CR>', { desc = '[A]I Copilot [T]oggle Buffer Status' })
@@ -116,6 +116,6 @@ vim.keymap.set('n', '<leader>as', ':Copilot status<CR>', { desc = '[A]I Copilot 
 vim.keymap.set('n', '<leader>al', ':Copilot model list<CR>', { desc = '[A]I Copilot [L]ist Models' })
 vim.keymap.set('n', '<leader>ap', ':Copilot panel<CR>', { desc = '[A]I Copilot [P]anel' })
 vim.keymap.set('n', '<leader>aa', ':Copilot suggestion toggle_auto_trigger<CR>',
-  { desc = '[A]I Copilot Toggle [A]uto Trigger' })
+    { desc = '[A]I Copilot Toggle [A]uto Trigger' })
 vim.keymap.set('n', '<leader>ad', ':Copilot disable<CR>', { desc = '[A]I Copilot [D]isable' })
 vim.keymap.set('n', '<leader>ae', ':Copilot enable<CR>', { desc = '[A]I Copilot [E]nable' })
