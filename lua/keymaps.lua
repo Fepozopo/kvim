@@ -14,7 +14,7 @@ vim.diagnostic.config {
     underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
     -- Can switch between these as you prefer
-    virtual_text = true, -- Text shows up at the end of the line
+    virtual_text = true,   -- Text shows up at the end of the line
     virtual_lines = false, -- Text shows up underneath the line, with virtual lines
 
     -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
@@ -96,7 +96,7 @@ vim.keymap.set('n', '<C-n>', ':tabe<CR>', { desc = 'Create new tab' })
 
 vim.keymap.set('n', '<leader>n', ':Oil --float<CR>', { desc = '[N]avigate' })
 
-vim.keymap.set('n', '<leader>p', ':MarkdownPreviewToggle<CR>', { desc = 'Markdown [P]review Toggle' })
+vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
 
 -- Make keymaps
 -- Make terminal splits
