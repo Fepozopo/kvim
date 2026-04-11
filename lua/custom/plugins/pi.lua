@@ -6,6 +6,11 @@
 return {
     {
         "pablopunk/pi.nvim",
+        cmd = { "PiAsk", "PiAskSelection", "PiLog" },
+        keys = {
+            { "<leader>ai", "<cmd>PiAsk<CR>",          desc = "Ask pi",             mode = "n" },
+            { "<leader>ai", "<cmd>PiAskSelection<CR>", desc = "Ask pi (selection)", mode = "v" },
+        },
         config = function()
             local ok, pi = pcall(require, "pi")
             if not ok or not pi then
