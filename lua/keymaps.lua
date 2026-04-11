@@ -94,11 +94,7 @@ vim.keymap.set({ 'i' }, '<D-s>', '<ESC>:w<CR>i', { desc = 'Save file' })
 
 vim.keymap.set('n', '<C-n>', ':tabe<CR>', { desc = 'Create new tab' })
 
-vim.keymap.set('n', '<leader>n', ':Oil --float<CR>', { desc = '[N]avigate' })
-
-vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
-
--- Make keymaps
+-- ================= Make keymaps =================
 -- Make terminal splits
 vim.api.nvim_set_keymap('n', '<leader>mtv', ':vsplit | terminal<CR>',
     { noremap = true, silent = true, desc = '[M]ake [T]erminal ([V]ertical Split)' })
@@ -110,12 +106,25 @@ vim.api.nvim_set_keymap('n', '<leader>msv', ':vsplit<CR>',
 vim.api.nvim_set_keymap('n', '<leader>msh', ':split<CR>',
     { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
 
+-- ================= Toggle keymaps =================
+-- Toggle Markdown preview
+vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
+
+-- Oil file explorer
+vim.keymap.set('n', '<leader>e', ':Oil --float<CR>', { desc = '[E]xplore files' })
+
+-- -- pi AI keymaps
+-- -- Ask pi with the current buffer as context
+-- vim.keymap.set("n", "<leader>ai", ":PiAsk<CR>", { desc = "Ask pi" })
+-- -- Ask pi with visual selection as context
+-- vim.keymap.set("v", "<leader>ai", ":PiAskSelection<CR>", { desc = "Ask pi (selection)" })
+
 -- Copilot AI keymaps
-vim.keymap.set('n', '<leader>at', ':Copilot toggle<CR>', { desc = '[A]I Copilot [T]oggle Buffer Status' })
-vim.keymap.set('n', '<leader>as', ':Copilot status<CR>', { desc = '[A]I Copilot [S]tatus' })
-vim.keymap.set('n', '<leader>al', ':Copilot model list<CR>', { desc = '[A]I Copilot [L]ist Models' })
-vim.keymap.set('n', '<leader>ap', ':Copilot panel<CR>', { desc = '[A]I Copilot [P]anel' })
-vim.keymap.set('n', '<leader>aa', ':Copilot suggestion toggle_auto_trigger<CR>',
+vim.keymap.set('n', '<leader>ct', ':Copilot toggle<CR>', { desc = '[A]I Copilot [T]oggle Buffer Status' })
+vim.keymap.set('n', '<leader>cs', ':Copilot status<CR>', { desc = '[A]I Copilot [S]tatus' })
+vim.keymap.set('n', '<leader>cl', ':Copilot model list<CR>', { desc = '[A]I Copilot [L]ist Models' })
+vim.keymap.set('n', '<leader>cp', ':Copilot panel<CR>', { desc = '[A]I Copilot [P]anel' })
+vim.keymap.set('n', '<leader>ca', ':Copilot suggestion toggle_auto_trigger<CR>',
     { desc = '[A]I Copilot Toggle [A]uto Trigger' })
-vim.keymap.set('n', '<leader>ad', ':Copilot disable<CR>', { desc = '[A]I Copilot [D]isable' })
-vim.keymap.set('n', '<leader>ae', ':Copilot enable<CR>', { desc = '[A]I Copilot [E]nable' })
+vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = '[A]I Copilot [D]isable' })
+vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[A]I Copilot [E]nable' })

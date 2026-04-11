@@ -52,9 +52,10 @@ require('lazy').setup({
   require 'custom.plugins.snacks',
   require 'custom.plugins.copilot',
   require 'custom.plugins.lualine',
-  require 'custom.plugins.opencode',
   require 'custom.plugins.rainbow_csv',
   require 'custom.plugins.markdown-preview',
+  require 'custom.plugins.opencode',
+  -- require 'custom.plugins.pi',
   -- require 'custom.plugins.99',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
