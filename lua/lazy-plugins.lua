@@ -56,6 +56,7 @@ require('lazy').setup({
   require 'custom.plugins.markdown-preview',
   require 'custom.plugins.opencode',
   -- require 'custom.plugins.99',
+  -- require 'custom.plugins.sidekick',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
