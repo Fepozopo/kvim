@@ -43,9 +43,9 @@ return {
             nes = {
                 enabled = false,
                 keymap = {
-                    accept_and_goto = "<M-Y>",
+                    accept_and_goto = "<M-S-y>",
                     accept = false,
-                    dismiss = "<M-N>",
+                    dismiss = "<M-S-n>",
                 },
             },
             filetypes = {
