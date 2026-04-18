@@ -29,6 +29,9 @@ return {
       topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
       changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
     },
+    -- Highlight the line number / whole line for changed hunks
+    numhl = true,   -- highlights the number column (GitSignsAddNr, GitSignsChangeNr, GitSignsDeleteNr)
+    linehl = false, -- set to true to highlight the whole line (GitSignsAddLn / GitSignsChangeLn / GitSignsDeleteLn)
     on_attach = function(bufnr)
       local gitsigns = require 'gitsigns'
 
@@ -57,10 +60,13 @@ return {
 
       -- Actions
       -- visual mode
-      map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [s]tage hunk' })
-      map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [r]eset hunk' })
+      map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+        { desc = 'git [s]tage hunk' })
+      map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+        { desc = 'git [r]eset hunk' })
       -- normal mode
       map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
+      map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
       map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
       map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
       map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
@@ -76,7 +82,7 @@ return {
       map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = '[T]oggle git show [w]ord diff' })
 
       -- Text object
-      map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+      map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, { desc = 'Select inner git [h]unk (text object)' })
     end,
   },
 }
