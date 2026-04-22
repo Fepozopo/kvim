@@ -8,7 +8,10 @@ return {
   config = function()
     local lint = require 'lint'
     lint.linters_by_ft = {
-      markdown = { 'markdownlint' }, -- Make sure to install `markdownlint` via mason / npm
+      markdown = { 'markdownlint', 'vale' }, -- Make sure to install `markdownlint` via mason / npm
+      go = { 'golangci-lint' },
+      python = { 'ruff' },
+      text = { 'vale' },
     }
 
     -- To allow other plugins to add linters to require('lint').linters_by_ft,
