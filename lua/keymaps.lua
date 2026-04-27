@@ -106,7 +106,6 @@ vim.api.nvim_set_keymap('n', '<leader>msv', ':vsplit<CR>',
 vim.api.nvim_set_keymap('n', '<leader>msh', ':split<CR>',
     { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
 
--- ================= Toggle keymaps =================
 -- Toggle Markdown preview
 vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
 
