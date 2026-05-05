@@ -105,6 +105,9 @@ vim.api.nvim_set_keymap('n', '<leader>msv', ':vsplit<CR>',
     { noremap = true, silent = true, desc = '[M]ake [S]plit [V]ertical' })
 vim.api.nvim_set_keymap('n', '<leader>msh', ':split<CR>',
     { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
+-- Make tabs
+vim.api.nvim_set_keymap('n', '<leader>mn', ':tabnew<CR>:Oil<CR>',
+    { noremap = true, silent = true, desc = '[M]ake [N]ew Tab' })
 
 -- Toggle Markdown preview
 vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
