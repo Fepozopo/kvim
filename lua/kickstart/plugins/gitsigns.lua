@@ -1,5 +1,19 @@
--- Gitsigns plugin configuration for kickstart
--- Adds mappings and a debounce helper to preview hunks inline after navigation
+-- Alternatively, use `config = function() ... end` for full control over the configuration.
+-- If you prefer to call `setup` explicitly, use:
+--    {
+--        'lewis6991/gitsigns.nvim',
+--        config = function()
+--            require('gitsigns').setup({
+--                -- Your gitsigns configuration here
+--            })
+--        end,
+--    }
+--
+-- Here is a more advanced example where we pass configuration
+-- options to `gitsigns.nvim`.
+--
+-- See `:help gitsigns` to understand what the configuration keys do
+
 ---@module 'lazy'
 ---@type LazySpec
 return {
@@ -15,69 +29,21 @@ return {
       topdelete = { text = '‾' }, ---@diagnostic disable-line: missing-fields
       changedelete = { text = '~' }, ---@diagnostic disable-line: missing-fields
     },
-    numhl = true,
-    linehl = false,
     on_attach = function(bufnr)
       local gitsigns = require 'gitsigns'
 
-      local function map(mode, lhs, rhs, opts)
+      local function map(mode, l, r, opts)
         opts = opts or {}
         opts.buffer = bufnr
-        vim.keymap.set(mode, lhs, rhs, opts)
+        vim.keymap.set(mode, l, r, opts)
       end
 
-      -- Helper: preview inline after scrolling/cursor movement has settled.
-      -- This avoids guessing a fixed delay by debouncing movement and scroll events.
-      local function preview_when_stable(opts)
-        opts = opts or {}
-        local debounce_ms = opts.debounce_ms or 60 -- adjust if you want faster/slower
-        local bufn = bufnr
-
-        local timer = vim.loop.new_timer()
-        -- unique augroup name per invocation to ensure cleanup
-        local group_name = ("GitsignsPreviewStable_%d_%d"):format(bufn, math.random(1, 1e9))
-        local augroup = vim.api.nvim_create_augroup(group_name, { clear = true })
-
-        local function cleanup()
-          pcall(function()
-            timer:stop()
-            timer:close()
-          end)
-          pcall(vim.api.nvim_del_augroup_by_name, group_name)
-        end
-
-        local function do_preview()
-          vim.schedule(function()
-            pcall(gitsigns.preview_hunk_inline)
-            cleanup()
-          end)
-        end
-
-        local function on_event()
-          -- restart timer on every event
-          pcall(function() timer:stop() end)
-          timer:start(debounce_ms, 0, vim.schedule_wrap(do_preview))
-        end
-
-        -- Listen to events that indicate viewport/cursor movement
-        vim.api.nvim_create_autocmd({ 'WinScrolled', 'CursorMoved', 'CursorMovedI', 'BufWinEnter' }, {
-          group = augroup,
-          buffer = bufn,
-          callback = on_event,
-        })
-
-        -- In case no events fire (cursor already in place), trigger once
-        on_event()
-      end
-
-      -- Navigation mappings: move to next/previous hunk and preview inline once viewport settles
+      -- Navigation
       map('n', ']c', function()
         if vim.wo.diff then
           vim.cmd.normal { ']c', bang = true }
         else
-          gitsigns.nav_hunk('next')
-          -- ensure the hunk is visible / preview after movement stops
-          preview_when_stable({ debounce_ms = 60 })
+          gitsigns.nav_hunk 'next'
         end
       end, { desc = 'Jump to next git [c]hange' })
 
@@ -85,41 +51,16 @@ return {
         if vim.wo.diff then
           vim.cmd.normal { '[c', bang = true }
         else
-          gitsigns.nav_hunk('prev')
-          preview_when_stable({ debounce_ms = 60 })
+          gitsigns.nav_hunk 'prev'
         end
       end, { desc = 'Jump to previous git [c]hange' })
 
-      -- Stage the current hunk, move to next/previous hunk and preview inline once viewport settles
-        map('n', '<D-M-y>', function()
-          if vim.wo.diff then
-            vim.cmd.normal { '<D-M-y>', bang = true }
-          else
-            gitsigns.stage_hunk()
-            gitsigns.nav_hunk('next')
-            preview_when_stable({ debounce_ms = 60 })
-          end
-        end, { desc = 'Stage current hunk and jump to next' })
-
-      -- Reset the current hunk, move to next/previous hunk and preview inline once viewport settles
-        map('n', '<D-M-n>', function()
-          if vim.wo.diff then
-            vim.cmd.normal { '<D-M-n>', bang = true }
-          else
-            gitsigns.reset_hunk()
-            gitsigns.nav_hunk('next')
-            preview_when_stable({ debounce_ms = 60 })
-          end
-        end, { desc = 'Reset current hunk and jump to next' })
-
       -- Actions
-      map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-        { desc = 'git [s]tage hunk' })
-      map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-        { desc = 'git [r]eset hunk' })
-
+      -- visual mode
+      map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [s]tage hunk' })
+      map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [r]eset hunk' })
+      -- normal mode
       map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
-      map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
       map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
       map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
       map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
@@ -128,15 +69,14 @@ return {
       map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end, { desc = 'git [b]lame line' })
       map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
       map('n', '<leader>hD', function() gitsigns.diffthis '@' end, { desc = 'git [D]iff against last commit' })
-      map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = 'git set [q]uickfix list with all hunks' })
-      map('n', '<leader>hq', gitsigns.setqflist, { desc = 'git set [q]uickfix list with buffer hunks' })
-
+      map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = 'git hunk [Q]uickfix list (all files in repo)' })
+      map('n', '<leader>hq', gitsigns.setqflist, { desc = 'git hunk [q]uickfix list (all changes in this file)' })
       -- Toggles
       map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-      map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = '[T]oggle git show [w]ord diff' })
+      map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = '[T]oggle git intra-line [w]ord diff' })
 
       -- Text object
-      map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, { desc = 'Select inner git [h]unk (text object)' })
+      map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
     end,
   },
 }
