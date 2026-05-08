@@ -90,6 +90,28 @@ return {
         end
       end, { desc = 'Jump to previous git [c]hange' })
 
+      -- Stage the current hunk, move to next/previous hunk and preview inline once viewport settles
+        map('n', '<D-M-y>', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '<D-M-y>', bang = true }
+          else
+            gitsigns.stage_hunk()
+            gitsigns.nav_hunk('next')
+            preview_when_stable({ debounce_ms = 60 })
+          end
+        end, { desc = 'Stage current hunk and jump to next' })
+
+      -- Reset the current hunk, move to next/previous hunk and preview inline once viewport settles
+        map('n', '<D-M-n>', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '<D-M-n>', bang = true }
+          else
+            gitsigns.reset_hunk()
+            gitsigns.nav_hunk('next')
+            preview_when_stable({ debounce_ms = 60 })
+          end
+        end, { desc = 'Reset current hunk and jump to next' })
+
       -- Actions
       map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
         { desc = 'git [s]tage hunk' })
