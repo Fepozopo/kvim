@@ -90,7 +90,7 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines and keep cursor position' })
 
 vim.keymap.set({ 'n' }, '<D-s>', ':w<CR>', { desc = 'Save file' })
-vim.keymap.set({ 'i' }, '<D-s>', '<ESC>:w<CR>i', { desc = 'Save file' })
+vim.keymap.set({ 'i' }, '<D-s>', '<ESC>:w<CR>a', { desc = 'Save file' })
 
 vim.keymap.set('n', '<C-n>', ':tabe<CR>', { desc = 'Create new tab' })
 
