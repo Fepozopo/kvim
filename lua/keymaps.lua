@@ -116,11 +116,11 @@ vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]ogg
 vim.keymap.set('n', '<leader>e', ':Oil --float<CR>', { desc = '[E]xplore files' })
 
 -- Copilot AI keymaps
-vim.keymap.set('n', '<leader>ct', ':Copilot toggle<CR>', { desc = 'AI [C]opilot [T]oggle Buffer Status' })
-vim.keymap.set('n', '<leader>cs', ':Copilot status<CR>', { desc = 'AI [C]opilot [S]tatus' })
-vim.keymap.set('n', '<leader>cl', ':Copilot model list<CR>', { desc = 'AI [C]opilot [L]ist Models' })
-vim.keymap.set('n', '<leader>cp', ':Copilot panel<CR>', { desc = 'AI [C]opilot [P]anel' })
+vim.keymap.set('n', '<leader>ct', ':Copilot toggle<CR>', { desc = '[C]opilot [T]oggle Buffer Status' })
+vim.keymap.set('n', '<leader>cs', ':Copilot status<CR>', { desc = '[C]opilot [S]tatus' })
+vim.keymap.set('n', '<leader>cl', ':Copilot model list<CR>', { desc = '[C]opilot [L]ist Models' })
+vim.keymap.set('n', '<leader>cp', ':Copilot panel<CR>', { desc = '[C]opilot [P]anel' })
 vim.keymap.set('n', '<leader>ca', ':Copilot suggestion toggle_auto_trigger<CR>',
-    { desc = 'AI [C]opilot Toggle [A]uto Trigger' })
-vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = 'AI [C]opilot [D]isable' })
-vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = 'AI [C]opilot [E]nable' })
+    { desc = '[C]opilot Toggle [A]uto Trigger' })
+vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = '[C]opilot [D]isable' })
+vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[C]opilot [E]nable' })
