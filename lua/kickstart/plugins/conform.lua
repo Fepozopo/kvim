@@ -24,6 +24,7 @@ return {
           python = true,
           rust = true,
           go = true,
+          json = true,
         }
         if enabled_filetypes[vim.bo[bufnr].filetype] then
           return { timeout_ms = 500 }
@@ -39,6 +40,7 @@ return {
         rust = { 'rustfmt' },
         go = { 'goimports' },
         python = { 'ruff' },
+        json = { 'json-repair' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

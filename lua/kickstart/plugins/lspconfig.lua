@@ -195,6 +195,7 @@ return {
         'ruff', -- Used to format/lint Python code
         'markdownlint', -- Used to format/lint Markdown files
         'vale', -- Used to format/lint prose (Markdown, Text, etc.)
+        'json-repair' -- Used to format JSON files
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
