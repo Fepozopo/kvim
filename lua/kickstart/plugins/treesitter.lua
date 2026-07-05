@@ -58,6 +58,18 @@ return {
         callback = function(args)
           local buf, filetype = args.buf, args.match
 
+          -- If it is a CSV, wait for all other processes to finish, then force Treesitter off
+          if filetype == 'csv' then
+            vim.schedule(function()
+              -- Ensure the buffer still exists before acting on it
+              if vim.api.nvim_buf_is_valid(buf) then
+                vim.treesitter.stop(buf)
+                vim.bo[buf].syntax = 'csv' -- Re-enable the standard syntax for the rainbow_csv plugin
+              end
+            end)
+            return -- Exit this function early
+          end
+
           local language = vim.treesitter.language.get_lang(filetype)
           if not language then return end
 
