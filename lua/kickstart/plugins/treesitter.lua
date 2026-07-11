@@ -29,6 +29,7 @@ return {
         'python',
         'rust',
         'css',
+        "odin"
       }
       require('nvim-treesitter').install(parsers)
 

@@ -112,7 +112,9 @@ return {
           --
           -- This may be unwanted, since they displace some of your code
           if client and client:supports_method('textDocument/inlayHint', event.buf) then
-            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+            map('<leader>th',
+              function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end,
+              '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -134,6 +136,7 @@ return {
         jsonls = {},
         sqlls = {},
         rust_analyzer = {},
+        ols = {},
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
@@ -190,12 +193,12 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
-        'goimports', -- Used to format Go code
+        'goimports',     -- Used to format Go code
         'golangci-lint', -- Used to lint Go code
-        'ruff', -- Used to format/lint Python code
-        'markdownlint', -- Used to format/lint Markdown files
-        'vale', -- Used to format/lint prose (Markdown, Text, etc.)
-        'json-repair' -- Used to format JSON files
+        'ruff',          -- Used to format/lint Python code
+        'markdownlint',  -- Used to format/lint Markdown files
+        'vale',          -- Used to format/lint prose (Markdown, Text, etc.)
+        'json-repair'    -- Used to format JSON files
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
