@@ -55,6 +55,7 @@ require('lazy').setup({
   require 'custom.plugins.rainbow_csv',
   require 'custom.plugins.markdown-preview',
   require 'custom.plugins.sidekick',
+  require 'custom.plugins.smear-cursor',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
