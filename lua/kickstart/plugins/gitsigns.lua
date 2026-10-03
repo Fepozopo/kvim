@@ -40,8 +40,10 @@ return {
 
       -- Actions
       -- visual mode
-      map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [s]tage hunk' })
-      map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = 'git [r]eset hunk' })
+      map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+        { desc = 'git [s]tage hunk' })
+      map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+        { desc = 'git [r]eset hunk' })
       -- normal mode
       map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
       map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
@@ -52,7 +54,8 @@ return {
       map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end, { desc = 'git [b]lame line' })
       map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
       map('n', '<leader>hD', function() gitsigns.diffthis '@' end, { desc = 'git [D]iff against last commit' })
-      map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = 'git hunk [Q]uickfix list (all files in repo)' })
+      map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end,
+        { desc = 'git hunk [Q]uickfix list (all files in repo)' })
       map('n', '<leader>hq', gitsigns.setqflist, { desc = 'git hunk [q]uickfix list (all changes in this file)' })
       -- Toggles
       map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
@@ -128,9 +131,9 @@ return {
       end, { desc = 'Jump to previous git [c]hange' })
 
       -- Stage the current hunk, move to next/previous hunk and preview inline once viewport settles
-      map('n', '<D-M-y>', function()
+      map('n', '<C-M-y>', function()
         if vim.wo.diff then
-          vim.cmd.normal { '<D-M-y>', bang = true }
+          vim.cmd.normal { '<C-M-y>', bang = true }
         else
           gitsigns.stage_hunk()
           gitsigns.nav_hunk 'next'
@@ -139,9 +142,9 @@ return {
       end, { desc = 'Stage current hunk and jump to next' })
 
       -- Reset the current hunk, move to next/previous hunk and preview inline once viewport settles
-      map('n', '<D-M-n>', function()
+      map('n', '<C-M-n>', function()
         if vim.wo.diff then
-          vim.cmd.normal { '<D-M-n>', bang = true }
+          vim.cmd.normal { '<C-M-n>', bang = true }
         else
           gitsigns.reset_hunk()
           gitsigns.nav_hunk 'next'

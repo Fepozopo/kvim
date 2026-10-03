@@ -12,7 +12,7 @@ return {
     config = function()
         require('copilot').setup {
             panel = {
-                enabled = true,
+                enabled = false,
                 auto_refresh = false,
                 keymap = {
                     jump_prev = '[[',
@@ -28,59 +28,59 @@ return {
             },
             suggestion = {
                 enabled = true,
-                auto_trigger = false,
+                auto_trigger = true,
                 hide_during_completion = true,
-                debounce = 75,
+                debounce = 15,
+                trigger_on_accept = true,
                 keymap = {
-                    accept = '<M-y>',
+                    accept = "<M-l>",
                     accept_word = false,
-                    accept_line = '<M-l>',
-                    next = '<M-]>',
-                    prev = '<M-[>',
-                    dismiss = '<M-n>',
+                    accept_line = false,
+                    next = "<M-]>",
+                    prev = "<M-[>",
+                    dismiss = "<C-]>",
+                    toggle_auto_trigger = false,
                 },
             },
             nes = {
                 enabled = false,
                 keymap = {
-                    accept_and_goto = "<M-S-y>",
+                    accept_and_goto = "<M-y>",
                     accept = false,
-                    dismiss = "<M-S-n>",
+                    dismiss = "<M-n>",
                 },
             },
-            filetypes = {
-                ['*'] = true,
-            },
+            filetypes = { "*" },
             auth_provider_url = nil, -- URL to authentication provider, if not "https://github.com/"
             logger = {
-                file = vim.fn.stdpath 'log' .. '/copilot-lua.log',
+                file = vim.fn.stdpath("log") .. "/copilot-lua.log",
                 file_log_level = vim.log.levels.OFF,
                 print_log_level = vim.log.levels.WARN,
-                trace_lsp = 'off', -- "off" | "messages" | "verbose"
+                trace_lsp = "off", -- "off" | "debug" | "verbose"
                 trace_lsp_progress = false,
                 log_lsp_messages = false,
             },
-            copilot_node_command = 'node', -- Node.js version must be > 20
+            copilot_node_command = 'node', -- Node.js version must be 22 or newer
             workspace_folders = {},
-            -- copilot_model = 'gpt-41-copilot', -- To use current LSP default, keep empty
+            copilot_model = "",
+            disable_limit_reached_message = false, -- Set to `true` to suppress completion limit reached popup
             root_dir = function()
-                return vim.fs.dirname(vim.fs.find('.git', { upward = true })[1])
+                return vim.fs.dirname(vim.fs.find(".git", { upward = true })[1])
             end,
-            should_attach = function(_, _)
-                if not vim.bo.buflisted then
-                    -- logger.debug("not attaching, buffer is not 'buflisted'")
+            -- Attach only to listed normal buffers; Copilot does not provide a global logger here.
+            should_attach = function(buf_id, _)
+                if not vim.bo[buf_id].buflisted then
                     return false
                 end
 
-                if vim.bo.buftype ~= '' then
-                    -- logger.debug("not attaching, buffer 'buftype' is " .. vim.bo.buftype)
+                if vim.bo[buf_id].buftype ~= "" then
                     return false
                 end
 
                 return true
             end,
             server = {
-                type = 'nodejs', -- "nodejs" | "binary"
+                type = "binary", -- "binary" | "nodejs"
                 custom_server_filepath = nil,
             },
             server_opts_overrides = {},
