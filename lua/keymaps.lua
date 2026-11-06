@@ -108,14 +108,14 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines and keep cursor position' })
 
 -- Save file
-vim.keymap.set({ 'n' }, '<M-s>', ':w<CR>', { desc = 'Save file' })
-vim.keymap.set({ 'i' }, '<M-s>', '<ESC>:w<CR>a', { desc = 'Save file' })
+vim.keymap.set({ 'n' }, '<M-w>', ':w<CR>', { desc = 'Save file' })
+vim.keymap.set({ 'i' }, '<M-w>', '<ESC>:w<CR>a', { desc = 'Save file' })
 
 -- Close window
-vim.keymap.set('n', '<M-w>', ':q<CR>', { desc = 'Close window' })
-vim.keymap.set('i', '<M-w>', '<ESC>:q<CR>', { desc = 'Close window' })
-vim.keymap.set('n', '<M-q>', ':qa<CR>', { desc = 'Close all windows' })
-vim.keymap.set('i', '<M-q>', '<ESC>:qa<CR>', { desc = 'Close all windows' })
+vim.keymap.set('n', '<M-q', ':q<CR>', { desc = 'Close window' })
+vim.keymap.set('i', '<M-q>', '<ESC>:q<CR>', { desc = 'Close window' })
+vim.keymap.set('n', '<M-Q>', ':qa<CR>', { desc = 'Close all windows' })
+vim.keymap.set('i', '<M-Q>', '<ESC>:qa<CR>', { desc = 'Close all windows' })
 
 -- Create new tab
 vim.keymap.set('n', '<C-n>', ':tabe<CR>', { desc = 'Create new tab' })
