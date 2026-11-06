@@ -3,7 +3,7 @@
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<Cmd>nohlsearch<CR>')
 
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
@@ -32,10 +32,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- vim.keymap.set('n', '<left>', '<Cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<Cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<Cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<Cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -67,20 +67,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- vim: ts=2 sts=2 sw=2 et
 
 -- Copilot AI keymaps
-vim.keymap.set('n', '<leader>ct', ':Copilot toggle<CR>', { desc = '[C]opilot [T]oggle Buffer Status' })
-vim.keymap.set('n', '<leader>cs', ':Copilot status<CR>', { desc = '[C]opilot [S]tatus' })
-vim.keymap.set('n', '<leader>cl', ':Copilot model list<CR>', { desc = '[C]opilot [L]ist Models' })
-vim.keymap.set('n', '<leader>cp', ':Copilot panel<CR>', { desc = '[C]opilot [P]anel' })
-vim.keymap.set('n', '<leader>ca', ':Copilot suggestion toggle_auto_trigger<CR>',
+vim.keymap.set('n', '<leader>ct', '<Cmd>Copilot toggle<CR>', { desc = '[C]opilot [T]oggle Buffer Status' })
+vim.keymap.set('n', '<leader>cs', '<Cmd>Copilot status<CR>', { desc = '[C]opilot [S]tatus' })
+vim.keymap.set('n', '<leader>cl', '<Cmd>Copilot model list<CR>', { desc = '[C]opilot [L]ist Models' })
+vim.keymap.set('n', '<leader>cp', '<Cmd>Copilot panel<CR>', { desc = '[C]opilot [P]anel' })
+vim.keymap.set('n', '<leader>ca', '<Cmd>Copilot suggestion toggle_auto_trigger<CR>',
     { desc = '[C]opilot Toggle [A]uto Trigger' })
-vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = '[C]opilot [D]isable' })
-vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[C]opilot [E]nable' })
+vim.keymap.set('n', '<leader>cd', '<Cmd>Copilot disable<CR>', { desc = '[C]opilot [D]isable' })
+vim.keymap.set('n', '<leader>ce', '<Cmd>Copilot enable<CR>', { desc = '[C]opilot [E]nable' })
 
 -- Toggle Markdown preview
-vim.keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
+vim.keymap.set('n', '<leader>tm', '<Cmd>MarkdownPreviewToggle<CR>', { desc = '[T]oggle [M]arkdown Preview' })
 
 -- Oil file explorer
-vim.keymap.set('n', '<leader>e', ':Oil --float<CR>', { desc = '[E]xplore files' })
+vim.keymap.set('n', '<leader>e', '<Cmd>Oil --float<CR>', { desc = '[E]xplore files' })
 
 -- better movement in wrapped text
 vim.keymap.set('n', 'j', function() return vim.v.count == 0 and 'gj' or 'j' end,
@@ -95,10 +95,10 @@ vim.keymap.set('n', '<C-Left>', '<C-w><', { desc = 'Decrease window width' })
 vim.keymap.set('n', '<C-Right>', '<C-w>>', { desc = 'Increase window width' })
 
 -- Move lines
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { desc = 'Move line down' })
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move line up' })
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
+vim.keymap.set('n', '<A-j>', '<Cmd>m .+1<CR>==', { desc = 'Move line down' })
+vim.keymap.set('n', '<A-k>', '<Cmd>m .-2<CR>==', { desc = 'Move line up' })
+vim.keymap.set('v', '<A-j>', "<Cmd>m '>+1<CR>gv=gv", { desc = 'Move selection down' })
+vim.keymap.set('v', '<A-k>', "<Cmd>m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Indent lines
 vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
@@ -108,30 +108,30 @@ vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join lines and keep cursor position' })
 
 -- Save file
-vim.keymap.set({ 'n' }, '<M-w>', ':w<CR>', { desc = 'Save file' })
-vim.keymap.set({ 'i' }, '<M-w>', '<ESC>:w<CR>a', { desc = 'Save file' })
+vim.keymap.set({ 'n' }, '<M-w>', '<Cmd>w<CR>', { desc = 'Save file' })
+vim.keymap.set({ 'i' }, '<M-w>', '<ESC><Cmd>w<CR>a', { desc = 'Save file' })
 
 -- Close window
-vim.keymap.set('n', '<M-q', ':q<CR>', { desc = 'Close window' })
-vim.keymap.set('i', '<M-q>', '<ESC>:q<CR>', { desc = 'Close window' })
-vim.keymap.set('n', '<M-Q>', ':qa<CR>', { desc = 'Close all windows' })
-vim.keymap.set('i', '<M-Q>', '<ESC>:qa<CR>', { desc = 'Close all windows' })
+vim.keymap.set('n', '<M-q>', '<Cmd>q<CR>', { desc = 'Close window' })
+vim.keymap.set('i', '<M-q>', '<ESC><Cmd>q<CR>', { desc = 'Close window' })
+vim.keymap.set('n', '<M-Q>', '<Cmd>qa<CR>', { desc = 'Close all windows' })
+vim.keymap.set('i', '<M-Q>', '<ESC><Cmd>qa<CR>', { desc = 'Close all windows' })
 
 -- Create new tab
-vim.keymap.set('n', '<C-n>', ':tabe<CR>', { desc = 'Create new tab' })
+vim.keymap.set('n', '<C-n>', '<Cmd>tabe<CR>', { desc = 'Create new tab' })
 
 -- Make terminal splits
-vim.api.nvim_set_keymap('n', '<leader>mtv', ':vsplit | terminal<CR>',
+vim.api.nvim_set_keymap('n', '<leader>mtv', '<Cmd>vsplit | terminal<CR>',
     { noremap = true, silent = true, desc = '[M]ake [T]erminal ([V]ertical Split)' })
-vim.api.nvim_set_keymap('n', '<leader>mth', ':split | terminal<CR>',
+vim.api.nvim_set_keymap('n', '<leader>mth', '<Cmd>split | terminal<CR>',
     { noremap = true, silent = true, desc = '[M]ake [T]erminal ([H]orizontal Split)' })
 -- Make splits
-vim.api.nvim_set_keymap('n', '<leader>msv', ':vsplit<CR>',
+vim.api.nvim_set_keymap('n', '<leader>msv', '<Cmd>vsplit<CR>',
     { noremap = true, silent = true, desc = '[M]ake [S]plit [V]ertical' })
-vim.api.nvim_set_keymap('n', '<leader>msh', ':split<CR>',
+vim.api.nvim_set_keymap('n', '<leader>msh', '<Cmd>split<CR>',
     { noremap = true, silent = true, desc = '[M]ake [S]plit [H]orizontal' })
 -- Make tabs
-vim.api.nvim_set_keymap('n', '<leader>mn', ':tabnew<CR>:Oil<CR>',
+vim.api.nvim_set_keymap('n', '<leader>mn', '<Cmd>tabnew | Oil<CR>',
     { noremap = true, silent = true, desc = '[M]ake [N]ew Tab' })
 
 -- Insert new line without entering insert mode and remain on current line
